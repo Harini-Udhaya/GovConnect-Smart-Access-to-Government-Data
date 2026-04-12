@@ -13,26 +13,27 @@ Chat-based user interface
 Fast semantic search using embeddings
 ⚡ Quick Start (3 Steps)
 1. Install Dependencies
-cd govquery
 pip install -r requirements.txt
-2. Set OpenAI API Key
+2. Set Groq API Key (Free)
 
-macOS / Linux
+👉 Get your key from: https://console.groq.com
 
-export OPENAI_API_KEY="sk-..."
+Windows (Command Prompt):
 
-Windows (Command Prompt)
+set GROQ_API_KEY=your_api_key_here
 
-set OPENAI_API_KEY=sk-...
+Windows (PowerShell):
 
-Windows (PowerShell)
+$env:GROQ_API_KEY="your_api_key_here"
 
-$env:OPENAI_API_KEY="sk-..."
+macOS / Linux:
+
+export GROQ_API_KEY=your_api_key_here
 3. Run the App
 python app.py
 
-Open in browser:
-👉 http://localhost:5000
+👉 Open in browser:
+http://localhost:5000
 
 💻 How to Use
 Upload one or more policy PDF documents
@@ -61,7 +62,7 @@ govquery/
 PDF Documents → Text Extraction → Chunking → Embeddings → Vector Store  
 
 User Query → Embedding → Semantic Search → Retrieve Relevant Chunks  
-→ AI Model (GPT-4o) → Answer + Source Citation
+→ Groq LLM → Answer + Source Citation
 🎥 Demo
 
 Users upload policy PDFs and ask questions like:
@@ -71,24 +72,25 @@ The system retrieves relevant sections and generates a clear answer along with t
 
 ⚙️ Environment Variables
 Variable	Required	Description
-OPENAI_API_KEY	Yes	OpenAI API key
-PORT	No	Default: 5000
+GROQ_API_KEY	Yes	Groq API key
+
 📝 Notes
+Uses Groq API for fast and free LLM responses
 Documents are stored and indexed locally
 Vector store persists across sessions
-Re-uploading same files is skipped
-Large PDFs may take time to process
 Works best with text-based PDFs
+
 🔮 Future Improvements
 Multi-language support (Hindi & regional languages)
 Voice-based interaction
 Integration with government portals
 Admin analytics dashboard
+
 🎯 Impact
 Reduces document search time by up to 70%
 Saves 200–500+ work hours/month per department
 Minimizes dependency on HR staff
 Improves decision-making efficiency
-📌 Conclusion
 
+📌 Conclusion
 GovQuery transforms complex government policy documents into an intelligent, conversational system—making information access faster, easier, and more efficient.
