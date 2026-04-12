@@ -214,7 +214,7 @@
         <div class="chat-title">Policy Helpdesk</div>
         <div class="chat-sub">Ask questions about government service rules and circulars</div>
       </div>
-      <span class="model-badge" id="modelBadge">GPT-4o · FAISS</span>
+      <span class="model-badge" id="modelBadge">Groq · LLaMA 3</span>
     </div>
 
     <div class="messages" id="messages">
@@ -256,6 +256,8 @@ async function fetchStatus() {
     renderDocList();
     document.getElementById("statusDot").className = "status-dot";
     document.getElementById("statusText").textContent = `${d.chunks_indexed} chunks indexed`;
+    const badge = document.getElementById("modelBadge");
+    if (badge) badge.textContent = `${d.llm_model || 'llama3-8b-8192'} · ${d.embed_mode === 'st' ? 'MiniLM' : 'TF-IDF'}`;
   } catch {
     document.getElementById("statusDot").className = "status-dot error";
     document.getElementById("statusText").textContent = "Backend not reachable";
