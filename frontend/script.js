@@ -1,6 +1,6 @@
 // ── Config ──────────────────────────────────────────────────────────────────
 
-const API_BASE = "https://govconnect-backend-5jf3.onrender.com/";
+const API_BASE = "https://govconnect-backend-5jf3.onrender.com";
 
 // ── State ────────────────────────────────────────────────────────────────────
 
