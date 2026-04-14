@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GovConnect · Policy Helpdesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ░░ NOISE OVERLAY ░░ -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ░░ SIDEBAR ░░ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-top">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <div class="brand-name">GovConnect</div>
+          <div class="brand-tag">Policy Intelligence</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Key -->
+    <div class="sidebar-section">
+      <div class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Groq API Key
+      </div>
+      <div class="key-input-wrap">
+        <input type="password" id="apiKeyInput" class="key-input" placeholder="gsk_..." autocomplete="off" />
+        <button class="key-toggle" id="keyToggle" title="Show/hide key">
+          <svg id="eyeIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+      <div class="key-status" id="keyStatus">
+        <span class="dot"></span> No key provided
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Upload -->
+    <div class="sidebar-section">
+      <div class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload Documents
+      </div>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <div class="upload-text">Drop PDFs here</div>
+        <div class="upload-sub">or click to browse</div>
+        <input type="file" id="fileInput" multiple accept=".pdf" style="display:none;" />
+      </div>
+      <button class="upload-btn" id="uploadBtn" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/><path d="M20 21H4"/></svg>
+        Index Documents
+      </button>
+      <div id="uploadProgress" class="upload-progress" style="display:none;">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">Processing…</div>
+      </div>
+      <div id="docList" class="doc-list"></div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Stats -->
+    <div class="sidebar-section">
+      <div class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Index Stats
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val" id="statDocs">0</div>
+          <div class="stat-lbl">Documents</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="statChunks">0</div>
+          <div class="stat-lbl">Chunks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="statQueries">0</div>
+          <div class="stat-lbl">Queries</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Instructions -->
+    <div class="sidebar-section">
+      <div class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        How to Use
+      </div>
+      <ol class="instructions">
+        <li>Enter your Groq API key</li>
+        <li>Upload policy PDF documents</li>
+        <li>Click "Index Documents"</li>
+        <li>Ask questions in the chat</li>
+        <li>Expand sources to verify answers</li>
+      </ol>
+    </div>
+
+    <!-- Reset -->
+    <div class="sidebar-bottom">
+      <button class="reset-btn" id="resetBtn">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.93"/></svg>
+        Reset Index
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ░░ MAIN ░░ -->
+  <main class="main">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <button class="sidebar-toggle" id="sidebarToggle" title="Toggle sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-title">
+        <span class="topbar-brand">GovConnect</span>
+        <span class="topbar-sep">·</span>
+        <span class="topbar-sub">Policy Helpdesk</span>
+      </div>
+      <div class="topbar-status" id="topbarStatus">
+        <span class="status-dot offline" id="statusDot"></span>
+        <span id="statusText">Not connected</span>
+      </div>
+    </header>
+
+    <!-- Chat window -->
+    <div class="chat-window" id="chatWindow">
+      <!-- Welcome state -->
+      <div class="welcome" id="welcomeState">
+        <div class="welcome-glyph">⚡</div>
+        <h2 class="welcome-title">Policy Intelligence, Instantly</h2>
+        <p class="welcome-desc">Upload official government PDFs and ask questions in plain English. Answers are sourced strictly from your documents.</p>
+        <div class="sample-queries" id="sampleQueries">
+          <button class="sample-chip" data-q="What is lien?">What is lien?</button>
+          <button class="sample-chip" data-q="Explain earned leave">Explain earned leave</button>
+          <button class="sample-chip" data-q="How are Grade A posts filled?">How are Grade A posts filled?</button>
+          <button class="sample-chip" data-q="Steps for redeployment of surplus staff">Redeployment of surplus staff</button>
+          <button class="sample-chip" data-q="What happens after pension approval?">After pension approval?</button>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages" id="messages"></div>
+    </div>
+
+    <!-- Input area -->
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea
+          id="queryInput"
+          class="query-input"
+          placeholder="Ask anything about your policy documents…"
+          rows="1"
+          autocomplete="off"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" disabled title="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="input-hint">Semantic search · No keyword guessing · Answers grounded in documents</div>
+    </div>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
