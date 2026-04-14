@@ -25,7 +25,8 @@ app = FastAPI(title="GovConnect API", version="1.0.0")
 # Allow frontend (any origin during dev)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # allow all for now
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
