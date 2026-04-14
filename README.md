@@ -1,10 +1,10 @@
-⚡GovConnect — AI Policy Helpdesk
+# ⚡ GovConnect — AI Policy Helpdesk
 
-A full-stack AI-powered policy assistant that enables government employees to query official documents using **semantic search + LLM intelligence**.
+A **full-stack AI-powered policy assistant** that enables government employees to query official documents using **semantic search + LLM intelligence**.
 
 🧠 No keyword matching. Only context-aware answers.
 
-✨ Key Features
+## ✨ Key Features
 
 - 🔍 **Semantic Search (FAISS)** — understands meaning, not keywords  
 - 🤖 **AI-Powered Answers (Groq LLM)** — accurate & context-based  
@@ -13,15 +13,15 @@ A full-stack AI-powered policy assistant that enables government employees to qu
 - 🎯 **Hallucination Control** — answers only from documents  
 - ⚡ **Fast & Lightweight** — fully local embeddings + free API  
 
-🖥️ Demo Preview
+## 🖥️ Demo Preview
 
-> Chat interface similar to ChatGPT with document-backed answers.
+Chat interface similar to ChatGPT with document-backed answers.
 - User asks a question  
 - System retrieves relevant content  
 - AI generates concise answer  
 - Sources displayed for verification  
 
-🗂️ Project Structure
+## 🗂️ Project Structure
 
 govconnect/
 ├── backend/
@@ -31,11 +31,14 @@ govconnect/
 │ ├── index.html # UI
 │ ├── styles.css # Styling
 │ └── script.js # Logic
+├── assets/
+│ ├── chat_ui.png # Chat interface screenshot
+│ ├── upload_section.png # Upload UI screenshot
+│ └── sources_view.png # Source view screenshot
 ├── requirements.txt
 └── README.md
 
-🚀 Quick Start
-
+## 🚀 Quick Start
 1️⃣ Install Dependencies
 bash
 pip install -r requirements.txt
@@ -62,7 +65,7 @@ What is lien?	Definition from Fundamental Rules
 What is earned leave?	Leave rules explanation
 Can leave be refused?	Rule-based answer
 Steps for surplus staff redeployment	Process explanation
-What is pension age?	❌ Not available (correct behavior)--> if the uploaded document doesnot match!
+What is pension age?	❌ Not available (correct behavior)--> if related information is not found in uploaded documents!
 
 🏗️ Architecture
 Frontend (HTML/CSS/JS)
@@ -93,13 +96,13 @@ Model	llama-3.1-8b-instant
 ✅ Rejects irrelevant queries
 ✅ Shows source for verification
 
-🆓 Tech Stack (100% Free)
-Layer	Technology
-Backend	FastAPI
+🆓 Tech Stack
+Layer	           Technology
+Backend	        FastAPI
 Embeddings	sentence-transformers
 Vector DB	FAISS
 PDF Parsing	PyMuPDF
-LLM	Groq (LLaMA 3.1)
+LLM	        Groq (LLaMA 3.1)
 Frontend	HTML, CSS, JavaScript
 
 🎯 Use Case
@@ -110,13 +113,21 @@ Administrative systems
 
 👉 Enables fast and accurate access to official rules and documents.
 
+📸 Screenshots
+### 💬 Chat Interface
+[Chat UI](assets/chat_ui.png)
+### 📂 Upload Documents
+[Upload](assets/upload_section.png)
+### 📄 Answer with Sources
+[Sources](assets/sources_view.png)
+
 🚀 Future Improvements
 🔍 Highlight matched text in UI
 📊 Confidence score visualization
 🧠 Multi-language support
 
 👨‍💻 Author
-Team MINDMESH
+Team **MINDMESH**
 
 ⭐ Final Note
 This project demonstrates how AI can make governance more accessible, efficient, and intelligent.
