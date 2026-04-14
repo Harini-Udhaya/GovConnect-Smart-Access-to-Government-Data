@@ -121,6 +121,15 @@ Administrative systems
 ### 📄 Answer with Sources
 [Sources](assets/sources_view.png)
 
+## 🌐 Live Deployment
+
+- Frontend (Vercel): https://govconnect-helpdesk-chatbot.vercel.app/ 
+- Backend (Render): https://govconnect-backend-5jf3.onrender.com
+⚠️ Note:
+> The backend is deployed on Render (free tier), which may go into a sleep state after inactivity.
+> As a result, the first request can take 30–60 seconds due to cold start.
+> For demonstration purposes, the application can also be run locally for faster performance. 
+
 🚀 Future Improvements
 🔍 Highlight matched text in UI
 📊 Confidence score visualization
