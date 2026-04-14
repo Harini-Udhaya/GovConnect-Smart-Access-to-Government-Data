@@ -3,6 +3,11 @@
 A **full-stack AI-powered policy assistant** that enables government employees to query official documents using **semantic search + LLM intelligence**.
 
 🧠 No keyword matching. Only context-aware answers.
+## 🤖 About the Project
+
+GovConnect is an AI-powered policy helpdesk that uses a Retrieval-Augmented Generation (RAG) architecture.
+It retrieves relevant information from uploaded government documents using semantic search (FAISS + embeddings) and generates accurate answers using an LLM (Groq).
+This ensures responses are grounded strictly in official documents, avoiding hallucinations.
 
 ## ✨ Key Features
 
