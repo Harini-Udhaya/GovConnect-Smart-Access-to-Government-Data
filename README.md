@@ -128,7 +128,43 @@ Administrative systems
 ⚠️ Note:
 > The backend is deployed on Render (free tier), which may go into a sleep state after inactivity.
 > As a result, the first request can take 30–60 seconds due to cold start.
-> For demonstration purposes, the application can also be run locally for faster performance. 
+> For demonstration purposes, the application can also be run locally for faster performance.
+
+## 📂 Demo Instructions
+
+To test the application correctly, please follow these steps:
+### 1. Upload Sample Documents
+Navigate to the sample_documents/ folder in this repository.
+
+Upload all the provided PDF files into the application and click **"Index Documents"**.
+
+### 2. Ask Relevant Questions
+Once indexing is complete, use the following sample queries:
+
+- What is lien?
+- Explain earned leave
+- What are the conditions for pension eligibility?
+- What is leave encashment?
+- How are promotions handled?
+- Under what conditions can leave be refused?
+- What are the rules for suspension and leave?
+- Compare earned leave and other types of leave
+- What are the key benefits provided after retirement?
+- Explain the rules related to leave and pension together
+- What is the maximum leave encashment allowed?
+- How is earned leave calculated?
+- Explain leave encashment rules
+
+### ⚠️ Important Note
+This system is designed to answer questions **only from the uploaded documents** using semantic search.
+- Queries must be related to the uploaded PDFs  
+- Irrelevant or unrelated questions will return:  
+  "The requested information is not available in the provided documents."
+
+### 💡 Tip for Best Experience
+- Upload all sample documents before asking questions  
+- Wait for indexing to complete  
+- Use the sample queries provided above  
 
 🚀 Future Improvements
 🔍 Highlight matched text in UI
