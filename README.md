@@ -1,96 +1,122 @@
-🧠 GovQuery — AI Policy Helpdesk
+⚡GovConnect — AI Policy Helpdesk
 
-GovQuery is an AI-powered policy helpdesk that enables government employees to ask questions in natural language and receive accurate, source-backed answers from official documents.
+A full-stack AI-powered policy assistant that enables government employees to query official documents using **semantic search + LLM intelligence**.
 
-Upload PDFs → Ask questions → Get instant answers with citations.
+🧠 No keyword matching. Only context-aware answers.
 
-🚀 Features
-Natural language question answering
-Retrieval-Augmented Generation (RAG) pipeline
-Source-backed responses from official documents
-PDF upload and automatic indexing
-Chat-based user interface
-Fast semantic search using embeddings
-⚡ Quick Start (3 Steps)
-1. Install Dependencies
-pip install -r requirements.txt
-2. Set Groq API Key (Free)
+✨ Key Features
 
-👉 Get your key from: https://console.groq.com
+- 🔍 **Semantic Search (FAISS)** — understands meaning, not keywords  
+- 🤖 **AI-Powered Answers (Groq LLM)** — accurate & context-based  
+- 📄 **PDF Document Support** — upload multiple policy files  
+- 🔗 **Source Transparency** — shows exact document references  
+- 🎯 **Hallucination Control** — answers only from documents  
+- ⚡ **Fast & Lightweight** — fully local embeddings + free API  
 
-Windows (Command Prompt):
+🖥️ Demo Preview
 
-set GROQ_API_KEY=your_api_key_here
+> Chat interface similar to ChatGPT with document-backed answers.
+- User asks a question  
+- System retrieves relevant content  
+- AI generates concise answer  
+- Sources displayed for verification  
 
-Windows (PowerShell):
+🗂️ Project Structure
 
-$env:GROQ_API_KEY="your_api_key_here"
-
-macOS / Linux:
-
-export GROQ_API_KEY=your_api_key_here
-3. Run the App
-python app.py
-
-👉 Open in browser:
-http://localhost:5000
-
-💻 How to Use
-Upload one or more policy PDF documents
-Wait for indexing to complete
-Ask questions in natural language
-Receive answers with source references
-🧪 Sample Test Queries
-
-(After uploading a CCS Leave Rules PDF)
-
-What is the maximum Earned Leave that can be accumulated?
-Can leave be refused by the sanctioning authority?
-What are the eligibility conditions for Child Care Leave?
-How is leave encashment calculated on retirement?
-What is the difference between Earned Leave and Half Pay Leave?
-📂 Project Structure
-govquery/
-├── app.py
+govconnect/
+├── backend/
+│ ├── main.py # FastAPI backend
+│ └── utils.py # AI + FAISS + PDF logic
+├── frontend/
+│ ├── index.html # UI
+│ ├── styles.css # Styling
+│ └── script.js # Logic
 ├── requirements.txt
-├── README.md
-├── static/
-│   └── index.html
-├── uploads/
-└── vector_store/
-🧠 Architecture
-PDF Documents → Text Extraction → Chunking → Embeddings → Vector Store  
+└── README.md
 
-User Query → Embedding → Semantic Search → Retrieve Relevant Chunks  
-→ Groq LLM → Answer + Source Citation
-🎥 Demo
+🚀 Quick Start
 
-Users upload policy PDFs and ask questions like:
-👉 “Can leave be refused by authority?”
+1️⃣ Install Dependencies
+bash
+pip install -r requirements.txt
+⚠️ First run downloads embedding model (~90MB)
 
-The system retrieves relevant sections and generates a clear answer along with the source reference.
+2️⃣ Get Free Groq API Key
+👉 https://console.groq.com
+Sign up
+Generate API key (gsk_...)
 
-⚙️ Environment Variables
-Variable	Required	Description
-GROQ_API_KEY	Yes	Groq API key
+3️⃣ Run Backend
+cd backend
+uvicorn main:app --reload --port 8000
+📍 Backend: http://localhost:8000
+📍 Docs: http://localhost:8000/docs
 
-📝 Notes
-Uses Groq API for fast and free LLM responses
-Documents are stored and indexed locally
-Vector store persists across sessions
-Works best with text-based PDFs
+4️⃣ Run Frontend
+Open:
+frontend/index.html
 
-🔮 Future Improvements
-Multi-language support (Hindi & regional languages)
-Voice-based interaction
-Integration with government portals
-Admin analytics dashboard
+🧪 Example Queries
+Question	Expected Result
+What is lien?	Definition from Fundamental Rules
+What is earned leave?	Leave rules explanation
+Can leave be refused?	Rule-based answer
+Steps for surplus staff redeployment	Process explanation
+What is pension age?	❌ Not available (correct behavior)--> if the uploaded document doesnot match!
 
-🎯 Impact
-Reduces document search time by up to 70%
-Saves 200–500+ work hours/month per department
-Minimizes dependency on HR staff
-Improves decision-making efficiency
+🏗️ Architecture
+Frontend (HTML/CSS/JS)
+        ↓
+FastAPI Backend
+        ↓
+PDF → Text → Chunking
+        ↓
+Sentence Transformers (Embeddings)
+        ↓
+FAISS Vector Search
+        ↓
+Groq LLM (Context-based Answer)
+        ↓
+Response + Source
 
-📌 Conclusion
-GovQuery transforms complex government policy documents into an intelligent, conversational system—making information access faster, easier, and more efficient.
+⚙️ Configuration
+Parameter	Value
+Chunk Size	500 words
+Overlap	80 words
+Top-K	3–5
+Similarity Threshold	~0.4
+Model	llama-3.1-8b-instant
+
+🛡️ Reliability & Accuracy
+✅ No hallucination (strict prompt)
+✅ Context-based answers only
+✅ Rejects irrelevant queries
+✅ Shows source for verification
+
+🆓 Tech Stack (100% Free)
+Layer	Technology
+Backend	FastAPI
+Embeddings	sentence-transformers
+Vector DB	FAISS
+PDF Parsing	PyMuPDF
+LLM	Groq (LLaMA 3.1)
+Frontend	HTML, CSS, JavaScript
+
+🎯 Use Case
+Designed for:
+Government employees
+Policy researchers
+Administrative systems
+
+👉 Enables fast and accurate access to official rules and documents.
+
+🚀 Future Improvements
+🔍 Highlight matched text in UI
+📊 Confidence score visualization
+🧠 Multi-language support
+
+👨‍💻 Author
+Team MINDMESH
+
+⭐ Final Note
+This project demonstrates how AI can make governance more accessible, efficient, and intelligent.
