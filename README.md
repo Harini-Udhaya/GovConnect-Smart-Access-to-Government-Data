@@ -2,12 +2,19 @@
 
 A **full-stack AI-powered policy assistant** that enables government employees to query official documents using **semantic search + LLM intelligence**.
 
-🧠 No keyword matching. Only context-aware answers.
+🧠 No keyword matching — only context-aware, document-grounded answers.
+
+---
+
 ## 🤖 About the Project
 
-GovConnect is an AI-powered policy helpdesk that uses a Retrieval-Augmented Generation (RAG) architecture.
-It retrieves relevant information from uploaded government documents using semantic search (FAISS + embeddings) and generates accurate answers using an LLM (Groq).
-This ensures responses are grounded strictly in official documents, avoiding hallucinations.
+GovConnect uses a **Retrieval-Augmented Generation (RAG)** architecture.
+
+- Retrieves relevant content from uploaded documents using **FAISS + embeddings**
+- Generates answers using **Groq LLM**
+- Ensures responses are grounded strictly in documents (no hallucination)
+
+---
 
 ## ✨ Key Features
 
@@ -16,15 +23,18 @@ This ensures responses are grounded strictly in official documents, avoiding hal
 - 📄 **PDF Document Support** — upload multiple policy files  
 - 🔗 **Source Transparency** — shows exact document references  
 - 🎯 **Hallucination Control** — answers only from documents  
-- ⚡ **Fast & Lightweight** — fully local embeddings + free API  
+- ⚡ **Local Embeddings** — fast and cost-efficient  
+
+---
 
 ## 🖥️ Demo Preview
 
-Chat interface similar to ChatGPT with document-backed answers.
-- User asks a question  
-- System retrieves relevant content  
-- AI generates concise answer  
-- Sources displayed for verification  
+- Ask a question  
+- Relevant document chunks are retrieved  
+- AI generates a concise answer  
+- Sources are displayed for verification  
+
+---
 
 ## 🗂️ Project Structure
 
@@ -37,115 +47,66 @@ govconnect/
 │ ├── styles.css # Styling
 │ └── script.js # Logic
 ├── assets/
-│ ├── chat_ui.png # Chat interface screenshot
-│ ├── upload_section.png # Upload UI screenshot
-│ └── sources_view.png # Source view screenshot
+│ ├── chat_ui.png
+│ ├── upload_section.png
+│ └── sources_view.png
+├── sample_documents/ # Sample PDFs for testing
 ├── requirements.txt
 └── README.md
 
+---
+
 ## 🚀 Quick Start
+
 1️⃣ Install Dependencies
 bash
 pip install -r requirements.txt
 ⚠️ First run downloads embedding model (~90MB)
 
-2️⃣ Get Free Groq API Key
+2️⃣ Get Groq API Key
 👉 https://console.groq.com
-Sign up
-Generate API key (gsk_...)
 
 3️⃣ Run Backend
 cd backend
 uvicorn main:app --reload --port 8000
-📍 Backend: http://localhost:8000
-📍 Docs: http://localhost:8000/docs
+📍 http://localhost:8000
+📍 http://localhost:8000/docs
 
 4️⃣ Run Frontend
 Open:
 frontend/index.html
 
-🧪 Example Queries
-Question	Expected Result
-What is lien?	Definition from Fundamental Rules
-What is earned leave?	Leave rules explanation
-Can leave be refused?	Rule-based answer
-Steps for surplus staff redeployment	Process explanation
-What is pension age?	❌ Not available (correct behavior)--> if related information is not found in uploaded documents!
+🌐 Live Deployment
+Frontend: https://govconnect-helpdesk-chatbot.vercel.app/
+Backend: https://govconnect-backend-5jf3.onrender.com
 
-🏗️ Architecture
-Frontend (HTML/CSS/JS)
-        ↓
-FastAPI Backend
-        ↓
-PDF → Text → Chunking
-        ↓
-Sentence Transformers (Embeddings)
-        ↓
-FAISS Vector Search
-        ↓
-Groq LLM (Context-based Answer)
-        ↓
-Response + Source
+⚠️ Important Note for Evaluation
+The backend is deployed on Render (free tier), which has:
+Cold start delay (30–60 seconds)
+Limited CPU and memory
+Timeout for heavy AI tasks
+Since this project uses embedding models + FAISS, document indexing may be slow or fail on live deployment.
 
-⚙️ Configuration
-Parameter	Value
-Chunk Size	500 words
-Overlap	80 words
-Top-K	3–5
-Similarity Threshold	~0.4
-Model	llama-3.1-8b-instant
+💡 Recommended Way to Test (BEST EXPERIENCE)
 
-🛡️ Reliability & Accuracy
-✅ No hallucination (strict prompt)
-✅ Context-based answers only
-✅ Rejects irrelevant queries
-✅ Shows source for verification
+Run locally for smooth performance:
+cd backend
+uvicorn main:app --reload
 
-🆓 Tech Stack
-Layer	           Technology
-Backend	        FastAPI
-Embeddings	sentence-transformers
-Vector DB	FAISS
-PDF Parsing	PyMuPDF
-LLM	        Groq (LLaMA 3.1)
-Frontend	HTML, CSS, JavaScript
+Update in script.js:
+const API_BASE = "http://localhost:8000";
 
-🎯 Use Case
-Designed for:
-Government employees
-Policy researchers
-Administrative systems
+✅ Fast indexing
+✅ Instant responses
+✅ Full functionality
 
-👉 Enables fast and accurate access to official rules and documents.
+📂 Demo Instructions
+1. Upload Documents
+Use files from:
+sample_documents/
 
-📸 Screenshots
-### 💬 Chat Interface
-[Chat UI](assets/chat_ui.png)
-### 📂 Upload Documents
-[Upload](assets/upload_section.png)
-### 📄 Answer with Sources
-[Sources](assets/sources_view.png)
-
-## 🌐 Live Deployment
-
-- Frontend (Vercel): https://govconnect-helpdesk-chatbot.vercel.app/ 
-- Backend (Render): https://govconnect-backend-5jf3.onrender.com
-⚠️ Note:
-> The backend is deployed on Render (free tier), which may go into a sleep state after inactivity.
-> As a result, the first request can take 30–60 seconds due to cold start.
-> For demonstration purposes, the application can also be run locally for faster performance.
-
-## 📂 Demo Instructions
-
-To test the application correctly, please follow these steps:
-### 1. Upload Sample Documents
-Navigate to the sample_documents/ folder in this repository.
-
-Upload all the provided PDF files into the application and click **"Index Documents"**.
-
-### 2. Ask Relevant Questions
-Once indexing is complete, use the following sample queries:
-
+2. Ask Questions
+Sample Queries
 - What is lien?
 - Explain earned leave
 - What are the conditions for pension eligibility?
@@ -160,24 +121,72 @@ Once indexing is complete, use the following sample queries:
 - How is earned leave calculated?
 - Explain leave encashment rules
 
-### ⚠️ Important Note
-This system is designed to answer questions **only from the uploaded documents** using semantic search.
-- Queries must be related to the uploaded PDFs  
-- Irrelevant or unrelated questions will return:  
-  "The requested information is not available in the provided documents."
+⚠️ Important Behavior
+Answers are based ONLY on uploaded documents
+No general knowledge
+Irrelevant queries → The requested information is not available in the provided documents.
 
-### 💡 Tip for Best Experience
-- Upload all sample documents before asking questions  
-- Wait for indexing to complete  
-- Use the sample queries provided above  
+🏗️ Architecture
+Frontend (HTML/CSS/JS)
+        ↓
+FastAPI Backend
+        ↓
+PDF → Text → Chunking
+        ↓
+Embeddings (Sentence Transformers)
+        ↓
+FAISS Vector Search
+        ↓
+Groq LLM
+        ↓
+Answer + Sources
+
+⚙️ Configuration
+Parameter	Value
+Chunk Size	500
+Overlap	        80
+Top-K	        3–5
+Threshold	~0.4
+Model	        llama-3.1-8b-instant
+
+🛡️ Reliability
+✅ No hallucination
+✅ Context-grounded answers
+✅ Source verification
+✅ Rejects irrelevant queries
+
+🆓 Tech Stack
+Layer	         Technology
+Backend	         FastAPI
+Embeddings	 sentence-transformers
+Vector DB	 FAISS
+PDF Parsing	 PyMuPDF
+LLM	         Groq
+Frontend	 HTML, CSS, JS
+
+🎯 Use Case
+Government employees
+Policy researchers
+Administrative systems
+👉 Enables fast access to official rules.
+
+📸 Screenshots
+### 💬 Chat Interface
+[Chat UI](assets/chat_ui.png)
+### 📂 Upload Documents
+[Upload](assets/upload_section.png)
+### 📄 Answer with Sources
+[Sources](assets/sources_view.png)
 
 🚀 Future Improvements
-🔍 Highlight matched text in UI
-📊 Confidence score visualization
-🧠 Multi-language support
+Deployment on ML platforms (Hugging Face Spaces / Railway)
+Model caching
+Background indexing
+Multi-language support
+UI enhancements
 
 👨‍💻 Author
 Team **MINDMESH**
 
 ⭐ Final Note
-This project demonstrates how AI can make governance more accessible, efficient, and intelligent.
+This project demonstrates how RAG-based AI systems can deliver reliable, document-grounded answers for real-world governance use cases.
